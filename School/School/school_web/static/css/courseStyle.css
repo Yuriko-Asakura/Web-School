@@ -1,0 +1,126 @@
+/* courseStyle.css */
+
+/* Общие стили */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #3498db; /* Primary color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #fff;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #cce5ff; /* Lighten primary color */
+}
+
+.button-logout {
+    background-color: #e74c3c; /* Danger color */
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.button-logout:hover {
+    background-color: #c0392b; /* Darken danger color */
+}
+
+/* Main Content Area */
+.main {
+    flex: 1;
+    padding: 2rem;
+}
+
+.content {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/* Footer */
+.footer {
+    padding: 1rem;
+    background-color: #3498db; /* Primary color */
+    text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    color: #fff;
+}
+
+/* Buttons (general style) */
+.button {
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    background-color: #3498db; /* Primary color */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer; /* Добавлено для кнопки */
+}
+
+.button:hover {
+    background-color: #2980b9; /* Darken primary color */
+}
+.button-create {
+    background-color: #2ecc71; /* Success color */
+}
+
+.button-create:hover {
+    background-color: #27ae60; /* Darken success color */
+}
+
+/* Responsive Design (пример) */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+    .nav {
+        margin-top: 1rem;
+    }
+    .nav-link {
+        margin-left: 0;
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+    }
+}

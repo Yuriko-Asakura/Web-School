@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать новый вопрос</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 30px;
+        }
+        form {
+            width: 80%;
+            max-width: 500px;
+             background-color: #333;
+           padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        label {
+           display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+           border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #555;
+           color: #fff;
+           appearance: none;
+           -webkit-appearance: none;
+           -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-chevron-down'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+            background-position: right 8px center;
+            background-repeat: no-repeat;
+        }
+        select:focus {
+             border-color: #4CAF50;
+            outline: none;
+        }
+       button {
+            display: block;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+           width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:active {
+           background-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Создать новый вопрос</h1>
+
+    <form method="GET" action="{% url 'create_question' course_id topic_id test_id %}">
+        <label for="question_type">Тип вопроса:</label>
+        <select id="question_type" name="question_type">
+            <option value="1">Несколько ответов</option>
+            <option value="2">Самописный</option>
+        </select>
+        <button type="submit">Далее</button>
+    </form>
+</body>
+</html>

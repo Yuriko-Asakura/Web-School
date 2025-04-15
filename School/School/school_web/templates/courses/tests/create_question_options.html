@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Введите варианты ответа</title>
+</head>
+<body>
+    <h1>Введите варианты ответа</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="question_text" value="{{ question_text }}">
+        <input type="hidden" name="correct_answer" value="{{ correct_answer }}">
+        <input type="hidden" name="question_type" value="{{ question_type }}">
+        <input type="hidden" name="num_options" value="{{ num_options }}">
+
+        <label for="correct_answer">Правильный ответ:</label><br>
+        <input type="text" id="correct_answer" name="correct_answer" value="{{ correct_answer }}" required><br><br>
+
+        {% for i in wrong_answers %}  
+            <label for="wrong_answer_{{ forloop.counter0 }}">Неправильный ответ {{ forloop.counter }}:</label><br>
+            <input type="text" id="wrong_answer_{{ forloop.counter0 }}" name="wrong_answer_{{ forloop.counter0 }}" value="{{ i }}"><br><br>
+        {% endfor %}
+
+        <button type="submit">Сохранить</button>
+    </form>
+</body>
+</html>

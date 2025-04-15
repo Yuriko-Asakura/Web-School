@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список курсов</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #3498db;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+
+        .logo h1 {
+            margin: 0;
+        }
+
+        .nav a {
+            margin-left: 1rem;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .button-logout {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .button-logout:hover {
+            background-color: #c0392b;
+        }
+
+        .main {
+            display: flex;
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            padding: 1rem;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            margin-right: 2rem;
+        }
+
+        .profile-card {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            margin: 0 0 0.5rem 0;
+        }
+
+        .profile-info {
+            margin: 0;
+            color: #777;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-link {
+            padding: 0.8rem 1rem;
+            text-decoration: none;
+            color: #333;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+            margin-bottom: 0.5rem;
+            display: block;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            background-color: #e0e0e0;
+            border-color: #ccc;
+        }
+
+        .content {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: #3498db;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-right: 0.5rem;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        .button.delete {
+            background-color: #e74c3c;
+        }
+
+        .button.delete:hover {
+            background-color: #c0392b;
+        }
+
+        .create-course {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .create-course .button {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+        }
+
+        .footer {
+            padding: 1rem;
+            background-color: #3498db;
+            text-align: center;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+
+        /* Адаптивный дизайн */
+        @media (max-width: 768px) {
+            .main {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>Список курсов</h1>
+            </div>
+            <nav class="nav">
+                <a href="#">Главная</a>
+                <a href="#">Профиль</a>
+                <form method="post" action="/logout/">
+                    {% csrf_token %}
+                    <button type="submit" class="button-logout"> Выйти</button>
+                </form>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="content">
+                <h1>Список курсов</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Описание</th>
+                            <th>Предмет</th>
+                            <th>Создатель</th>
+                            <th>Действия</th>
+                            <th>Темы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                            <tr>
+                                <td>{{ course.CourseName }}</td>
+                                <td>{{ course.Description }}</td>
+                                <td>
+                                    {% if course.PredmetName %}
+                                        {{ course.PredmetName }}
+                                    {% else %}
+                                        Нет предмета
+                                    {% endif %}
+                                </td>
+                                <td>{{ course.2 }}</td>
+                                <td>
+                                    <a href="{% url 'update_course' course.ID_Course %}" target="_blank" class="button">Обновить</a>
+                                    <a href="{% url 'delete_course' course.ID_Course %}" target="_blank" class="button delete">Удалить</a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'course_topics' course.ID_Course %}" target="_blank" class="button">Темы</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="create-course">
+                    <a href="{% url 'create_course'%}" target="_blank" class="button">Создать курс</a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2023 Ваш сайт. Все права защищены.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали лекции</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .page-title {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 30px;
+        }
+        .lecture-detail {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .lecture-title {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .lecture-content {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .button-container {
+            text-align: center;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .button-update {
+            background-color: #28a745;
+        }
+        .button-update:hover {
+            background-color: #218838;
+        }
+        .button-back {
+            background-color: #007bff;
+        }
+        .button-back:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title">Детали лекции</h1>
+        <div class="lecture-detail">
+            <h2 class="lecture-title">{{ lecture.Title }}</h2>
+            {% load markdownify %}
+            <div class="lecture-content">
+                {{ lecture.Content|markdownify }}
+            </div>
+            <div class="button-container">
+                <a href="{% url 'edit_lecture' course_id=course_id topic_id=topic_id pk=lecture.ID_Lecture %}" class="button button-update">
+                    <i class="fas fa-edit"></i> Редактировать
+                </a>
+                <a href="{% url 'lectures_for_topic' course_id=course_id topic_id=topic_id %}" class="button button-back">
+                    <i class="fas fa-arrow-left"></i> Назад к списку лекций
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

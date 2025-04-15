@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список лекций</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/lecture_list.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>Список лекций</h1>
+            </div>
+            <nav class="nav">
+                <a href="#">Главная</a>
+                <a href="#">Профиль</a>
+                <form method="post" action="/logout/">
+                    {% csrf_token %}
+                    <button type="submit" class="button-logout">Выйти</button>
+                 </form>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="content">
+                <h1>Список лекций</h1>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if not lectures %}
+                    <p class="empty-message">Нет доступных лекций.</p>
+                {% else %}
+                    <ul class="lecture-list">
+                        {% for lecture in lectures %}
+                            <li>
+                                <a href="{% url 'lecture_detail' course_id=course_id topic_id=topic_id pk=lecture.ID_Lecture %}" class="lecture-link">{{ lecture.Title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <div class="create-course">
+                    <a href="{% url 'create_lecture' course_id=course_id topic_id=topic_id %}" class="button">Создать лекцию</a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2023 Ваш сайт. Все права защищены.</p>
+        </footer>
+    </div>
+</body>
+</html>

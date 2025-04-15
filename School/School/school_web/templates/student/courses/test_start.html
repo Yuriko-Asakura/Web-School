@@ -1,0 +1,26 @@
+{% block content %}
+    <h1 style="color: #333; font-weight: bold;">Тест: {{ test_name }}</h1>
+
+    <form method="POST" action="{% url 'test_submit' test_id topic_id %}" style="max-width: 800px; margin: 40px auto; display: flex; flex-direction: column;">
+        {% csrf_token %}
+
+        {% for question in questions %}
+            <div class="question" style="margin-bottom: 20px;">
+                <p style="margin-bottom: 10px;">{{ question.text }}</p>
+                {% if question.type == 2 %}
+                    <input type="text" name="text_answer_{{ question.id }}" id="text_answer_{{ question.id }}" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                {% else %}
+                    {% for answer in question.answers %}
+                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <input type="checkbox" name="answer_{{ question.id }}_{{ forloop.counter }}" id="answer_{{ question.id }}_{{ forloop.counter }}" value="{{ answer }}" style="margin-right: 10px;">
+                            <label for="answer_{{ question.id }}_{{ forloop.counter }}" style="flex: 1;">{{ answer }}</label>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" style="padding: 10px 20px; border: none; background-color: #4CAF50; color: white; border-radius: 4px; cursor: pointer;">Отправить</button>
+    </form>
+
+{% endblock %}

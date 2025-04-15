@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резервное копирование базы данных</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px; /* Увеличены отступы */
+            padding: 40px; /* Увеличены отступы */
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: #f9f9f9;
+            font-size: 18px; /* Увеличен размер шрифта */
+        }
+        h2 {
+            color: #ffffff;
+            font-size: 28px; /* Увеличен размер шрифта заголовка */
+            text-align: center; /* Центрирование заголовка */
+        }
+        label {
+            margin-right: 15px; /* Увеличен отступ */
+            color: #f9f9f9;
+            font-size: 18px; /* Увеличен размер шрифта */
+        }
+        select {
+            margin-right: 15px; /* Увеличен отступ */
+            background-color: #444;
+            color: #f9f9f9;
+            border: 1px solid #666;
+            border-radius: 3px;
+            padding: 10px; /* Увеличены внутренние отступы */
+            font-size: 16px; /* Увеличен размер шрифта */
+        }
+        button, input[type="submit"] {
+            padding: 10px 20px; /* Увеличены отступы кнопки */
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px; /* Увеличен размер шрифта */
+            transition: background-color 0.3s; /* Плавный переход цвета */
+        }
+        button:hover, input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        .buttons {
+            text-align: center; /* Центрирование кнопок */
+            margin-top: 20px; /* Отступ сверху для кнопок */
+        }
+    </style>
+</head>
+<body>
+    <h2>Резервное копирование базы данных</h2>
+    <form method="post" action="{% url 'backup_database' %}" onsubmit="return confirmFormat()">
+        {% csrf_token %}
+        <label for="file_format">Выберите формат файла:</label>
+        <select name="file_format" id="file_format">
+            <option value="xlsx">xlsx</option>
+            <option value="json">json</option>
+            <option value="sql">sql</option>
+            <option value="csv">csv</option>
+        </select><br><br>
+        <div class="buttons">
+            <input type="submit" value="Создать резервную копию">
+        </div>
+    </form>
+</body>
+</html>

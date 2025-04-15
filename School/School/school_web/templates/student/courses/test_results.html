@@ -1,0 +1,23 @@
+{% block content %}
+    <div style="max-width: 800px; margin: 40px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+        <h1 style="color: #333; text-align: center;">Результаты теста</h1>
+
+        <p style="font-size: 18px; color: #555;">Вы ответили правильно на <strong>{{ result.correct_count }}</strong> из <strong>{{ result.total_questions }}</strong> вопросов.</p>
+
+        <p style="font-size: 18px; color: #555;">Ваш процент правильных ответов: <strong>{{ result.percentage|floatformat:2 }}</strong>%</p>
+
+        {% if result.percentage >= 50 %}
+            <p style="font-size: 20px; color: green; font-weight: bold; text-align: center;">Поздравляем! Вы успешно прошли тест!</p>
+        {% else %}
+            <p style="font-size: 20px; color: red; font-weight: bold; text-align: center;">К сожалению, вы не прошли тест. Попробуйте еще раз.</p>
+        {% endif %}
+
+        {% if error_message %}
+            <p style="color: red; text-align: center; font-weight: bold;">{{ error_message }}</p>
+        {% endif %}
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="{% url 'courses_list' %}" target="_blank" style="padding: 10px 20px; border: none; background-color: #4CAF50; color: white; border-radius: 4px; text-decoration: none; font-weight: bold;">Список курсов</a>
+        </div>
+    </div>
+{% endblock %}
